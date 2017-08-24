@@ -1,0 +1,40 @@
+On opening, the app displays -
+    A header area
+        Search box => for entering the location name
+        //use google api to obtain lat, lng
+            Display box of latitude and longitude
+        //then, in parallel, obtain google static map and put it in the
+            Map of the location entered
+        //then, AJAX call to /weather/get and display in the ->
+            Placeholder for weather info box of the location entered in Search box
+            Each info box in this area will have an "Add to watch" button
+            //clicking the "add" button calls /location/add
+            adds an info box to the info area
+    An info area
+        //make a call to /weather/getAll
+        //Query db for all locations added to watch populate
+            Info box for each location previously "Added to watch"
+            Each info box in this area shall have a " remove from watch" button
+            //clicking the "remove" button calls /location/remove
+
+
+directory structure
+    index.js
+        //setup db
+        //import app
+        //start server
+
+    app.js
+        //use modules
+        //use controller
+    public/
+        main.css
+        frontend.js
+    models/
+        watchlist.js
+        log.js
+    controllers/
+        weather.js
+        location.js
+    routes/
+        index.js
