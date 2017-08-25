@@ -5,6 +5,49 @@
         <title>{{title}}</title>
     </head>
     <body>
-        {{location}}
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address" value="">
+        <ul>
+            <li>
+                <p>Lat:<span name="lat" id="lat"></span></p>
+            </li>
+            <li>
+                <p>Lng:<span name="lng" id="lng"></span></p>
+            </li>
+        </ul>
+        <div class="infobox">
+            <ul>
+                <li>
+                    Temperature: <span id="temperature"></span>
+                </li>
+                <li>
+                    Apparent temperature: <span id="apparentTemperature"></span>
+                </li>
+                <li>
+                    Dew Point: <span id="dewPoint"></span>
+                </li>
+                <li>
+                    Humidity: <span id="humidity"></span>
+                </li>
+                <li>
+                    Wind Speed: <span id="windSpeed"></span>
+                </li>
+                <li>
+                    Wind Gust: <span id="windGust"></span>
+                </li>
+                <li>
+                    Wind Bearing: <span id="windBearing"></span>
+                </li>
+                <li>
+                    Cloud Cover: <span id="cloudCover"></span>
+                </li>
+                <li>
+                    Pressure: <span id="pressure"></span>
+                </li>
+            </ul>
+        </div>
     </body>
+    <script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places'></script>
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js'></script>
+    <script type="text/javascript" src="/module.js"></script>
 </html>
