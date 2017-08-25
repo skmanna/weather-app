@@ -38,3 +38,43 @@ directory structure
         location.js
     routes/
         index.js
+
+model - watchlist - Place
+    _id:
+    placeId:
+    name:
+    address:
+    geometry: {
+        type: { type: String, default: 'Point' },
+        coordinates: { type: [Number], index: '2dsphere' }
+    }
+    watched: boolean,
+    lastUpdated: Date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /////

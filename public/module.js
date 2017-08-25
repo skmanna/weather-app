@@ -1,30 +1,76 @@
-function autoComplete(input, latDisplay, lngDisplay) {
+function autoComplete(input, addressDisplay, latDisplay, lngDisplay) {
     if(!input) {
         return;
     }
     const dropdown = new google.maps.places.Autocomplete(input);
     dropdown.addListener('place_changed', () => {
         const place = dropdown.getPlace();
-        latDisplay.innerHTML = place.geometry.location.lat();
-        lngDisplay.innerHTML = place.geometry.location.lng();
-        // console.log(`ajax call here ${latDisplay.innerHTML}/${lngDisplay.innerHTML}`);
-        //console.log(axios);
-        axios
-            .get(`/weather/get/${latDisplay.innerHTML}/${lngDisplay.innerHTML}`)
-            .then((res) => {
-                console.log(res);
-                let items = document.querySelectorAll('.infobox li span');
-                items.forEach((item) => {
-                    item.innerHTML = res.data[item.id];
-                });
-            });
 
-    });
-    input.addEventListener('keydown', (e) => {
-        if(e.keyCode === 13) {
-            e.preventDefault();
-            // console.log(`ajax call here ${document.querySelector('#lat').innerHTML}, ${lngDisplay.innerHTML}`);
-        }
+        const placeId = place.place_id;
+        const name = place.name;
+        const address = place.formatted_address;
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+
+        document.querySelector('#address').innerHTML = address;
+        document.querySelector('#lat').innerHTML = lat;
+        document.querySelector('#lng').innerHTML = lng;
+
+        requestWeatherData(placeId, name, address, lat, lng);
     });
 }
-autoComplete(document.querySelector('#address'), document.querySelector('#lat'), document.querySelector('#lng'));
+function requestWeatherData(placeId, name, address, lat, lng) {
+    axios
+        .get(`/weather/${placeId}/${name}/${address}/${lat}/${lng}`)
+        .then((res) => {
+            showWeatherInfo('.infobox li span', res.data);
+        });
+}
+function showWeatherInfo(divSelector, data) {
+    let items = document.querySelectorAll(divSelector);
+    items.forEach((item) => {
+        item.innerHTML = data[item.id];
+    });
+}
+function submitNewLocation(locationData) {
+    axios.post(`/location/add`, locationData)
+        .then((res) => {
+            console.log("Req:", res.data);
+        })
+}
+
+autoComplete(document.querySelector('#name'));
+
+document.querySelectorAll('.action').forEach(function(element) {
+    element.addEventListener("click", function(e) {
+        if(this.dataset.action === "add") {
+            const locationData = {
+                placeId: this.parentNode.querySelector('#placeId').innerText,
+                name: this.parentNode.querySelector('#name').innerText,
+                address: this.parentNode.querySelector('#address').innerText,
+                lat: this.parentNode.querySelector('#lat').innerText,
+                lng: this.parentNode.querySelector('#lng').innerText,
+            }
+            submitNewLocation(locationData);
+        } else {
+            console.log('Remove button');
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////

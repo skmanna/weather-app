@@ -10,11 +10,18 @@ exports.landing = (req, res) => {
 }
 exports.getWeatherByCoords = (req, res) => {
     // console.log(`${req.params.lat}/${req.params.lng}`);
-    const url = `${process.env.WEATHER_URL}/${req.params.lat},${req.params.lng}`;
+    const url = `${process.env.WEATHER_URL}/${req.params.lat},${req.params.lng}?units=${process.env.WEATHER_UNITS}`;
     // console.log(url);
     axios.get(url)
         .then(response => {
             const currentData = {
+                placeId: req.params.id,
+                name: req.params.name,
+                address: req.params.address,
+                lat: req.params.lat,
+                lng: req.params.lng,
+                timezone: response.data.timezone,
+                time: new Date(response.data.currently.time),
                 temperature: response.data.currently.temperature,
                 apparentTemperature: response.data.currently.apparentTemperature,
                 dewPoint: response.data.currently.dewPoint,

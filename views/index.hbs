@@ -6,45 +6,30 @@
     </head>
     <body>
         <label for="address">Address</label>
-        <input type="text" name="address" id="address" value="">
-        <ul>
-            <li>
-                <p>Lat:<span name="lat" id="lat"></span></p>
-            </li>
-            <li>
-                <p>Lng:<span name="lng" id="lng"></span></p>
-            </li>
-        </ul>
+        <input type="text" name="name" id="name" value="">
         <div class="infobox">
             <ul>
-                <li>
-                    Temperature: <span id="temperature"></span>
-                </li>
-                <li>
-                    Apparent temperature: <span id="apparentTemperature"></span>
-                </li>
-                <li>
-                    Dew Point: <span id="dewPoint"></span>
-                </li>
-                <li>
-                    Humidity: <span id="humidity"></span>
-                </li>
-                <li>
-                    Wind Speed: <span id="windSpeed"></span>
-                </li>
-                <li>
-                    Wind Gust: <span id="windGust"></span>
-                </li>
-                <li>
-                    Wind Bearing: <span id="windBearing"></span>
-                </li>
-                <li>
-                    Cloud Cover: <span id="cloudCover"></span>
-                </li>
-                <li>
-                    Pressure: <span id="pressure"></span>
-                </li>
+                <li>Place Id: <span id="placeId"></span></li>
+                <li>Name: <span id="name"></span></li>
+                <li>Address: <span id="address"></span></li>
+                <li><p>Lat:<span id="lat"></span></p></li>
+                <li><p>Lng:<span id="lng"></span></p></li>
+
+                <li>Time Zone: <span id="timezone"></span></li>
+                <li>Time: <span id="time"></span></li>
+                <li>Temperature: <span id="temperature"></span></li>
+                <li>Apparent temperature: <span id="apparentTemperature"></span></li>
+                <li>Dew Point: <span id="dewPoint"></span></li>
+                <li>Humidity: <span id="humidity"></span></li>
+                <li>Wind Speed: <span id="windSpeed"></span></li>
+                <li>Wind Gust: <span id="windGust"></span></li>
+                <li>Wind Bearing: <span id="windBearing"></span></li>
+                <li>Cloud Cover: <span id="cloudCover"></span></li>
+                <li>Pressure: <span id="pressure"></span></li>
             </ul>
+            <div class="action" data-action="add">
+                <p>Add to watchlist</p>
+            </div>
         </div>
     </body>
     <script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places'></script>
