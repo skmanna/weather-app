@@ -22,5 +22,13 @@ exports.addLocation = (req, res) => {
 
 }
 exports.removeLocation = (req, res) => {
-    res.send('In removeLocation');
+    console.log('In removeLocation' + req.params.id);
+    Location.findOneAndRemove({place_id: req.params.id})
+        .then((location) => {
+            res.json(location);
+        })
+        .catch(err => {
+            res.json({err});
+        })
+    // res.send('In removeLocation');
 }
