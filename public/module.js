@@ -66,12 +66,14 @@ function makeInfoBox(data, action) {
         infobox.appendChild(li);
     });
     let refreshDiv = document.createElement('div');
+    refreshDiv.id = `${data.placeId}__refresh`;
     refreshDiv.classList.add('action');
     refreshDiv.setAttribute('data-action', 'refresh');
     refreshDiv.innerHTML = 'Refresh';
     refreshDiv.addEventListener("click", watchListActions);
 
     let actionDiv = document.createElement('div');
+    actionDiv.id = `${data.placeId}__action`;
     actionDiv.classList.add('action');
     actionDiv.setAttribute('data-action', action);
     actionDiv.innerHTML = action;
@@ -104,14 +106,6 @@ function watchListActions(e) {
                     .then(infobox => {
                         document.querySelector('.watchlist').appendChild(infobox);
                     })
-                // let infobox = makeInfoBox(data, "remove");
-                //
-                // console.log("Infobox: " + infobox);
-                // console.log("Watchlist: ", document.querySelector('.watchlist'));
-                // document.querySelector('.watchlist').appendChild(infobox);
-                // console.log("Watchlist: ", document.querySelector('.watchlist'));
-
-
             })
     } else if (this.dataset.action === "refresh") {
         console.log("in refresh");
@@ -121,8 +115,12 @@ function watchListActions(e) {
             this.parentNode.querySelector(`#${id}__lat`).innerText,
             this.parentNode.querySelector(`#${id}__lng`).innerText,
             this.parentNode.querySelector(`#${id}__name`).innerText,
-            this.parentNode.querySelector(`#${id}__address`).innerText
-        );
+            this.parentNode.querySelector(`#${id}__address`).innerText,
+            this.parentNode.querySelector(`#${id}__action`).dataset.action
+        )
+        .then(infobox => {
+            this.parentNode.parentNode.replaceChild(infobox, this.parentNode);
+        })
     } else if (this.dataset.action === "remove"){
         // console.log('Remove button');
         const id = this.parentNode.id;
